@@ -65,3 +65,20 @@ sequenceDiagram
 
     Note right of browser: El navegador renderiza las notas usando los datos JSON
 ```
+
+0.6 Nueva nota en diagrama de aplicación de una sola pagina
+
+```mermaid
+sequenceDiagram
+    participant user as Usuario
+    participant browser as Navegador
+    participant server as Servidor
+
+    user->>browser: Escribe una nueva nota y presiona "Guardar"
+    browser->>server: POST /new_note_spa (nueva nota en JSON)
+    activate server
+    server-->>browser: 201 Created (nota creada)
+    deactivate server
+
+    Note right of browser: El navegador actualiza la lista de notas localmente sin recargar la página
+```
