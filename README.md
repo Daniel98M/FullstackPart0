@@ -2,7 +2,7 @@
 
 Parte 0 del curso virtual Fullstack
 
-0.4. Diagrama mermaid del flujo de la página de ejemplo
+0.4. Nuevo diagrama de nota
 
 ```mermaid
 sequenceDiagram
@@ -32,3 +32,36 @@ sequenceDiagram
     deactivate server
 
     Note right of browser: El navegador actualiza la página para mostrar la nueva nota
+```
+
+0.5 Diagrama de aplicación de una sola página
+
+```mermaid
+sequenceDiagram
+    participant user as Usuario
+    participant browser as Navegador
+    participant server as Servidor
+
+    user->>browser: Accede a /spa
+    browser->>server: GET /spa
+    activate server
+    server-->>browser: 304 Not Modified (usa versión en caché)
+    deactivate server
+
+    browser->>server: GET /main.css
+    activate server
+    server-->>browser: 304 Not Modified (usa versión en caché)
+    deactivate server
+
+    browser->>server: GET /spa.js
+    activate server
+    server-->>browser: 304 Not Modified (usa versión en caché)
+    deactivate server
+
+    browser->>server: GET /data.json
+    activate server
+    server-->>browser: 200 OK (datos JSON)
+    deactivate server
+
+    Note right of browser: El navegador renderiza las notas usando los datos JSON
+```
